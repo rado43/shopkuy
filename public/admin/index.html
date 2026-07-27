@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Admin — ShopKuy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--ink:#111827;--blue:#2563EB;--amber:#F59E0B;--muted:#6B7280;--line:#E9EBEF;--bg:#F6F7F9}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;cursor:pointer}
+  input,select,textarea{font-family:inherit;font-size:14px;width:100%;border:1px solid #D9DDE3;border-radius:10px;padding:11px 13px;outline:none;background:#fff}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#374151}
+  .field{margin-bottom:14px}
+  .btn{border:none;font-weight:700;font-size:14px;padding:11px 18px;border-radius:10px}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid #D9DDE3}
+  .btn-sm{padding:7px 12px;font-size:13px;font-weight:600;border-radius:8px}
+  .btn-danger{background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5}
+  /* login */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .login-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px;max-width:400px;width:100%;box-shadow:0 20px 50px rgba(17,24,39,.06)}
+  .logo{font-size:26px;font-weight:800}.logo span{color:var(--amber)}
+  /* app shell */
+  .shell{display:none;min-height:100vh;grid-template-columns:240px 1fr}
+  .shell.show{display:grid}
+  aside{background:#0F1623;color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+  aside .logo{color:#fff;padding:0 8px 20px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.7);background:none;border:none;width:100%;text-align:left;margin-bottom:2px}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav-item.active{background:var(--blue);color:#fff}
+  main{padding:28px 30px;overflow:auto;height:100vh}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .topbar h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:28px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+  .stat .n{font-size:30px;font-weight:800;letter-spacing:-.02em}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:2px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .panel-h{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .panel-h h3{font-size:16px;font-weight:700}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:12px 20px;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.04em}
+  td{padding:13px 20px;border-bottom:1px solid #F1F2F4;font-size:14px;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px}
+  .tag-on{background:#ECFDF5;color:#059669}.tag-off{background:#F3F4F6;color:#6B7280}
+  .thumb{width:44px;height:52px;border-radius:8px;object-fit:cover;background:#F3F4F6;border:1px solid var(--line)}
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap}
+  /* modal */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(15,22,35,.55);display:none;align-items:flex-start;justify-content:center;padding:30px 20px;overflow:auto}
+  .overlay.show{display:flex}
+  .modal{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:24px}
+  .modal h3{font-size:19px;font-weight:800;margin-bottom:18px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .full{grid-column:1/-1}
+  .check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+  .check input{width:auto}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:80;opacity:0;transition:opacity .3s;pointer-events:none}
+  .toast.show{opacity:1}
+  .err{color:#DC2626;font-size:13px;margin-top:8px;min-height:18px}
+  .imgs-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .imgs-row .ti{position:relative;width:56px;height:66px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .imgs-row .ti img{width:100%;height:100%;object-fit:cover}
+  .imgs-row .ti button{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;width:18px;height:18px;border-radius:50%;font-size:11px;line-height:1}
+  @media(max-width:720px){.shell.show{grid-template-columns:1fr}aside{display:none}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginView">
+    <div class="login-card">
+      <div class="logo" style="margin-bottom:6px">ShopKuy<span>.</span></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Masuk ke panel admin</p>
+      <div class="field"><label>Email</label><input id="email" type="email" value="email@domain.com" /></div>
+      <div class="field"><label>Password</label><input id="password" type="password" placeholder="••••••••" /></div>
+      <button class="btn btn-primary" style="width:100%" id="loginBtn">Masuk</button>
+      <div class="err" id="loginErr"></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="shell" id="shell">
+    <aside>
+      <div class="logo">ShopKuy<span>.</span></div>
+      <button class="nav-item active" data-view="dashboard">Dashboard</button>
+      <button class="nav-item" data-view="products">Produk</button>
+      <button class="nav-item" data-view="categories">Kategori</button>
+      <button class="nav-item" data-view="banners">Banner</button>
+      <button class="nav-item" data-view="testimonials">Testimoni</button>
+      <button class="nav-item" data-view="settings">Pengaturan</button>
+      <div style="margin-top:auto">
+        <a href="/" target="_blank" class="nav-item" style="text-decoration:none">↗ Lihat Toko</a>
+        <button class="nav-item" id="logoutBtn">Keluar</button>
+      </div>
+    </aside>
+    <main id="main"></main>
+  </div>
+
+  <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+  <div class="toast" id="toast"></div>
+
+<script>
+let TOKEN = localStorage.getItem('sk_token') || '';
+let CATS = [];
+const $ = s => document.querySelector(s);
+const rp = n => 'Rp ' + (n||0).toLocaleString('id-ID');
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+async function apiReq(path, method='GET', body){
+  const opt={method,headers:{}};
+  if(body){opt.headers['Content-Type']='application/json';opt.body=JSON.stringify(body);}
+  if(TOKEN) opt.headers['Authorization']='Bearer '+TOKEN;
+  const r=await fetch('/api'+path,opt);
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data.error||'Gagal');
+  return data;
+}
+
+/* ---------- AUTH ---------- */
+async function login(){
+  $('#loginErr').textContent='';
+  try{
+    const {token}=await apiReq('/auth/login','POST',{email:$('#email').value,password:$('#password').value});
+    TOKEN=token; localStorage.setItem('sk_token',token); enterApp();
+  }catch(e){ $('#loginErr').textContent=e.message; }
+}
+function logout(){ TOKEN=''; localStorage.removeItem('sk_token'); $('#shell').classList.remove('show'); $('#loginView').style.display='flex'; }
+async function enterApp(){
+  try{ await apiReq('/auth/me'); }catch(e){ logout(); return; }
+  $('#loginView').style.display='none'; $('#shell').classList.add('show');
+  CATS=await apiReq('/categories'); go('dashboard');
+}
+
+/* ---------- ROUTER ---------- */
+const views={};
+function go(v){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.view===v));
+  views[v]();
+}
+
+/* ---------- DASHBOARD ---------- */
+views.dashboard=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Dashboard</h1></div><div class="cards" id="cards"></div><div class="panel"><div class="panel-h"><h3>Produk Terbaru</h3></div><div id="recent"></div></div>';
+  const [prods,cats]=await Promise.all([apiReq('/products'),apiReq('/categories')]);
+  const pub=prods.filter(p=>p.published).length;
+  $('#cards').innerHTML=[
+    ['Total Produk',prods.length],['Produk Publish',pub],['Kategori',cats.length],['Pengunjung','—']
+  ].map(c=>`<div class="stat"><div class="n">${c[1]}</div><div class="l">${c[0]}</div></div>`).join('');
+  $('#recent').innerHTML=table(['','Nama','Harga','Status'],prods.slice(0,6).map(p=>`<tr>
+    <td>${thumb(p)}</td><td><b>${p.name}</b><div style="color:#9CA3AF;font-size:12px">${p.brand||''}</div></td>
+    <td>${rp(p.discount_price??p.price)}</td><td>${p.published?'<span class="tag tag-on">Publish</span>':'<span class="tag tag-off">Hidden</span>'}</td></tr>`).join(''));
+};
+function thumb(p){const im=(p.images&&p.images[0]);return im?`<img class="thumb" src="${im}"/>`:'<div class="thumb"></div>';}
+function table(cols,rows){return `<table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows||''}</tbody></table>`;}
+
+/* ---------- PRODUCTS ---------- */
+views.products=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Produk</h1><button class="btn btn-blue" id="addP">+ Tambah Produk</button></div><div class="panel" id="pPanel"></div>';
+  $('#addP').onclick=()=>productForm();
+  const prods=await apiReq('/products');
+  $('#pPanel').innerHTML=table(['','Nama','Kategori','Harga','Stok','Status','Aksi'],prods.map(p=>`<tr>
+    <td>${thumb(p)}</td>
+    <td><b>${p.name}</b><div style="color:#9CA3AF;font-size:12px">${p.brand||''} · ${p.sku||''}</div></td>
+    <td>${p.category_name||'-'}</td>
+    <td>${rp(p.discount_price??p.price)}${p.discount_price!=null?`<div style="color:#9CA3AF;font-size:12px;text-decoration:line-through">${rp(p.price)}</div>`:''}</td>
+    <td>${p.stock}</td>
+    <td>${p.published?'<span class="tag tag-on">Publish</span>':'<span class="tag tag-off">Hidden</span>'}</td>
+    <td><div class="row-actions">
+      <button class="btn btn-sm btn-ghost" data-edit="${p.id}">Edit</button>
+      <button class="btn btn-sm btn-ghost" data-pub="${p.id}" data-cur="${p.published}">${p.published?'Hide':'Publish'}</button>
+      <button class="btn btn-sm btn-ghost" data-dup="${p.id}">Duplikat</button>
+      <button class="btn btn-sm btn-danger" data-del="${p.id}">Hapus</button>
+    </div></td></tr>`).join(''));
+  const byId=id=>prods.find(p=>p.id==id);
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>productForm(byId(b.dataset.edit)));
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Hapus produk ini?')){await apiReq('/products/'+b.dataset.del,'DELETE');toast('Produk dihapus');views.products();}});
+  document.querySelectorAll('[data-dup]').forEach(b=>b.onclick=async()=>{await apiReq('/products/'+b.dataset.dup+'/duplicate','POST');toast('Produk diduplikat');views.products();});
+  document.querySelectorAll('[data-pub]').forEach(b=>b.onclick=async()=>{await apiReq('/products/'+b.dataset.pub+'/publish','PATCH',{published:b.dataset.cur!=='true'});toast('Status diperbarui');views.products();});
+};
+
+function productForm(p){
+  p=p||{};
+  const catOpts=CATS.map(c=>`<option value="${c.id}" ${p.category_id==c.id?'selected':''}>${c.name}</option>`).join('');
+  const imgs=(p.images||[]);
+  $('#modal').innerHTML=`<h3>${p.id?'Edit':'Tambah'} Produk</h3>
+   <div class="form-grid">
+    <div class="field full"><label>Nama Produk *</label><input id="f_name" value="${esc(p.name)}"/></div>
+    <div class="field"><label>Slug (opsional)</label><input id="f_slug" value="${esc(p.slug)}" placeholder="otomatis dari nama"/></div>
+    <div class="field"><label>SKU</label><input id="f_sku" value="${esc(p.sku)}"/></div>
+    <div class="field"><label>Kategori</label><select id="f_cat"><option value="">— pilih —</option>${catOpts}</select></div>
+    <div class="field"><label>Brand</label><input id="f_brand" value="${esc(p.brand)}"/></div>
+    <div class="field"><label>Harga (Rp) *</label><input id="f_price" type="number" value="${p.price||''}"/></div>
+    <div class="field"><label>Harga Diskon (Rp)</label><input id="f_disc" type="number" value="${p.discount_price??''}"/></div>
+    <div class="field"><label>Stok</label><input id="f_stock" type="number" value="${p.stock||0}"/></div>
+    <div class="field"><label>Ukuran (pisah koma)</label><input id="f_sizes" value="${esc((p.sizes||[]).join(', '))}"/></div>
+    <div class="field full"><label>Warna (Nama:#hex, pisah koma)</label><input id="f_colors" value="${esc((p.colors||[]).map(c=>c.name+':'+c.hex).join(', '))}" placeholder="Hitam:#111827, Putih:#F1F5F9"/></div>
+    <div class="field full"><label>Deskripsi</label><textarea id="f_desc" rows="3">${esc(p.description)}</textarea></div>
+    <div class="field"><label>Link Tokopedia</label><input id="f_tokped" value="${esc(p.tokopedia_url)}"/></div>
+    <div class="field"><label>Link Shopee</label><input id="f_shopee" value="${esc(p.shopee_url)}"/></div>
+    <div class="field"><label>Nomor WhatsApp</label><input id="f_wa" value="${esc(p.whatsapp_number)}" placeholder="6281234567890"/></div>
+    <div class="field"><label>Gambar Produk</label><input id="f_files" type="file" accept="image/*" multiple/><div class="imgs-row" id="imgsRow"></div></div>
+    <div class="field full" style="display:flex;flex-wrap:wrap;gap:18px;margin-top:4px">
+      <label class="check"><input type="checkbox" id="f_featured" ${p.featured?'checked':''}/> Unggulan</label>
+      <label class="check"><input type="checkbox" id="f_best" ${p.best_seller?'checked':''}/> Terlaris</label>
+      <label class="check"><input type="checkbox" id="f_new" ${p.new_arrival?'checked':''}/> Baru</label>
+      <label class="check"><input type="checkbox" id="f_pub" ${p.published!==false?'checked':''}/> Publish</label>
+    </div>
+   </div>
+   <div class="err" id="f_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
+     <button class="btn btn-ghost" onclick="closeModal()">Batal</button>
+     <button class="btn btn-primary" id="saveP">Simpan</button>
+   </div>`;
+  openModal();
+  let images=imgs.slice();
+  function renderImgs(){$('#imgsRow').innerHTML=images.map((u,i)=>`<div class="ti"><img src="${u}"/><button data-i="${i}">✕</button></div>`).join('');
+    document.querySelectorAll('#imgsRow button').forEach(b=>b.onclick=()=>{images.splice(+b.dataset.i,1);renderImgs();});}
+  renderImgs();
+  $('#f_files').onchange=async e=>{
+    const files=e.target.files; if(!files.length)return;
+    const fd=new FormData(); for(const f of files) fd.append('files',f);
+    try{ const r=await fetch('/api/upload',{method:'POST',headers:{Authorization:'Bearer '+TOKEN},body:fd}); const d=await r.json(); if(d.urls){images=images.concat(d.urls);renderImgs();toast('Gambar diunggah');} }
+    catch(err){ toast('Upload gagal'); }
+  };
+  $('#saveP').onclick=async()=>{
+    const sizes=$('#f_sizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const colors=$('#f_colors').value.split(',').map(s=>s.trim()).filter(Boolean).map(s=>{const [name,hex]=s.split(':');return {name:(name||'').trim(),hex:(hex||'#cccccc').trim()};});
+    const body={
+      name:$('#f_name').value,slug:$('#f_slug').value,category_id:$('#f_cat').value||null,brand:$('#f_brand').value,
+      price:$('#f_price').value,discount_price:$('#f_disc').value,stock:$('#f_stock').value,sku:$('#f_sku').value,
+      description:$('#f_desc').value,sizes,colors,images,
+      tokopedia_url:$('#f_tokped').value,shopee_url:$('#f_shopee').value,whatsapp_number:$('#f_wa').value,
+      featured:$('#f_featured').checked,best_seller:$('#f_best').checked,new_arrival:$('#f_new').checked,published:$('#f_pub').checked
+    };
+    if(!body.name){$('#f_err').textContent='Nama produk wajib diisi';return;}
+    try{ await apiReq('/products'+(p.id?'/'+p.id:''),p.id?'PUT':'POST',body); closeModal(); toast('Produk disimpan'); views.products(); }
+    catch(e){ $('#f_err').textContent=e.message; }
+  };
+}
+
+/* ---------- CATEGORIES ---------- */
+views.categories=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Kategori</h1><button class="btn btn-blue" id="addC">+ Tambah Kategori</button></div><div class="panel" id="cPanel"></div>';
+  $('#addC').onclick=()=>catForm();
+  CATS=await apiReq('/categories');
+  $('#cPanel').innerHTML=table(['Nama','Slug','Produk','Status','Aksi'],CATS.map(c=>`<tr>
+    <td><b>${c.name}</b></td><td style="color:#6B7280">${c.slug}</td><td>${c.product_count||0}</td>
+    <td>${c.published?'<span class="tag tag-on">Aktif</span>':'<span class="tag tag-off">Hidden</span>'}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-ec="${c.id}">Edit</button><button class="btn btn-sm btn-danger" data-dc="${c.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-ec]').forEach(b=>b.onclick=()=>catForm(CATS.find(c=>c.id==b.dataset.ec)));
+  document.querySelectorAll('[data-dc]').forEach(b=>b.onclick=async()=>{if(confirm('Hapus kategori ini?')){await apiReq('/categories/'+b.dataset.dc,'DELETE');toast('Kategori dihapus');views.categories();}});
+};
+function catForm(c){c=c||{};
+  $('#modal').innerHTML=`<h3>${c.id?'Edit':'Tambah'} Kategori</h3>
+   <div class="field"><label>Nama *</label><input id="c_name" value="${esc(c.name)}"/></div>
+   <div class="field"><label>Slug (opsional)</label><input id="c_slug" value="${esc(c.slug)}"/></div>
+   <div class="field"><label>Urutan</label><input id="c_sort" type="number" value="${c.sort||0}"/></div>
+   <label class="check"><input type="checkbox" id="c_pub" ${c.published!==false?'checked':''}/> Aktif</label>
+   <div class="err" id="c_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveC">Simpan</button></div>`;
+  openModal();
+  $('#saveC').onclick=async()=>{const body={name:$('#c_name').value,slug:$('#c_slug').value,sort:$('#c_sort').value,published:$('#c_pub').checked};
+    if(!body.name){$('#c_err').textContent='Nama wajib diisi';return;}
+    try{await apiReq('/categories'+(c.id?'/'+c.id:''),c.id?'PUT':'POST',body);closeModal();toast('Kategori disimpan');views.categories();}catch(e){$('#c_err').textContent=e.message;}};
+}
+
+/* ---------- BANNERS ---------- */
+views.banners=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Banner</h1><button class="btn btn-blue" id="addB">+ Tambah Banner</button></div><div class="panel" id="bPanel"></div>';
+  $('#addB').onclick=()=>bannerForm();
+  const bs=await apiReq('/banners');
+  $('#bPanel').innerHTML=table(['Judul','Subjudul','Tombol','Status','Aksi'],bs.map(b=>`<tr>
+    <td><b>${esc(b.title)}</b></td><td style="color:#6B7280">${esc(b.subtitle)}</td><td>${esc(b.button_text)}</td>
+    <td>${b.active?'<span class="tag tag-on">Aktif</span>':'<span class="tag tag-off">Off</span>'}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-eb="${b.id}">Edit</button><button class="btn btn-sm btn-danger" data-db="${b.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-eb]').forEach(x=>x.onclick=()=>bannerForm(bs.find(b=>b.id==x.dataset.eb)));
+  document.querySelectorAll('[data-db]').forEach(x=>x.onclick=async()=>{if(confirm('Hapus banner?')){await apiReq('/banners/'+x.dataset.db,'DELETE');toast('Banner dihapus');views.banners();}});
+};
+function bannerForm(b){b=b||{};
+  $('#modal').innerHTML=`<h3>${b.id?'Edit':'Tambah'} Banner</h3>
+   <div class="field"><label>Judul</label><input id="b_title" value="${esc(b.title)}"/></div>
+   <div class="field"><label>Subjudul</label><input id="b_sub" value="${esc(b.subtitle)}"/></div>
+   <div class="form-grid"><div class="field"><label>Teks Tombol</label><input id="b_bt" value="${esc(b.button_text)}"/></div>
+   <div class="field"><label>Link Tombol</label><input id="b_bl" value="${esc(b.button_link)}"/></div></div>
+   <label class="check"><input type="checkbox" id="b_act" ${b.active!==false?'checked':''}/> Aktif</label>
+   <div class="err" id="b_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveB">Simpan</button></div>`;
+  openModal();
+  $('#saveB').onclick=async()=>{const body={title:$('#b_title').value,subtitle:$('#b_sub').value,button_text:$('#b_bt').value,button_link:$('#b_bl').value,active:$('#b_act').checked};
+    try{await apiReq('/banners'+(b.id?'/'+b.id:''),b.id?'PUT':'POST',body);closeModal();toast('Banner disimpan');views.banners();}catch(e){$('#b_err').textContent=e.message;}};
+}
+
+/* ---------- TESTIMONIALS ---------- */
+views.testimonials=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Testimoni</h1><button class="btn btn-blue" id="addT">+ Tambah Testimoni</button></div><div class="panel" id="tPanel"></div>';
+  $('#addT').onclick=()=>testiForm();
+  const ts=await apiReq('/testimonials');
+  $('#tPanel').innerHTML=table(['Nama','Asal','Testimoni','Rating','Aksi'],ts.map(t=>`<tr>
+    <td><b>${esc(t.name)}</b></td><td style="color:#6B7280">${esc(t.role)}</td><td style="max-width:320px">${esc(t.text)}</td><td>${'★'.repeat(t.rating||5)}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-et="${t.id}">Edit</button><button class="btn btn-sm btn-danger" data-dt="${t.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-et]').forEach(x=>x.onclick=()=>testiForm(ts.find(t=>t.id==x.dataset.et)));
+  document.querySelectorAll('[data-dt]').forEach(x=>x.onclick=async()=>{if(confirm('Hapus testimoni?')){await apiReq('/testimonials/'+x.dataset.dt,'DELETE');toast('Testimoni dihapus');views.testimonials();}});
+};
+function testiForm(t){t=t||{};
+  $('#modal').innerHTML=`<h3>${t.id?'Edit':'Tambah'} Testimoni</h3>
+   <div class="form-grid"><div class="field"><label>Nama *</label><input id="t_name" value="${esc(t.name)}"/></div>
+   <div class="field"><label>Asal / Kota</label><input id="t_role" value="${esc(t.role)}"/></div></div>
+   <div class="field"><label>Testimoni</label><textarea id="t_text" rows="3">${esc(t.text)}</textarea></div>
+   <div class="field"><label>Rating (1-5)</label><input id="t_rate" type="number" min="1" max="5" value="${t.rating||5}"/></div>
+   <div class="err" id="t_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveT">Simpan</button></div>`;
+  openModal();
+  $('#saveT').onclick=async()=>{const body={name:$('#t_name').value,role:$('#t_role').value,text:$('#t_text').value,rating:$('#t_rate').value};
+    if(!body.name){$('#t_err').textContent='Nama wajib diisi';return;}
+    try{await apiReq('/testimonials'+(t.id?'/'+t.id:''),t.id?'PUT':'POST',body);closeModal();toast('Testimoni disimpan');views.testimonials();}catch(e){$('#t_err').textContent=e.message;}};
+}
+
+/* ---------- SETTINGS ---------- */
+views.settings=async()=>{
+  const s=await apiReq('/settings');
+  $('#main').innerHTML=`<div class="topbar"><h1>Pengaturan Toko</h1></div>
+   <div class="panel" style="padding:24px;max-width:720px">
+    <div class="form-grid">
+      <div class="field"><label>Nama Toko</label><input id="s_name" value="${esc(s.store_name)}"/></div>
+      <div class="field"><label>Tagline</label><input id="s_tag" value="${esc(s.tagline)}"/></div>
+      <div class="field"><label>Nomor WhatsApp</label><input id="s_wa" value="${esc(s.whatsapp_number)}" placeholder="6281234567890"/></div>
+      <div class="field"><label>Email</label><input id="s_email" value="${esc(s.email)}"/></div>
+      <div class="field"><label>Instagram (URL)</label><input id="s_ig" value="${esc(s.instagram)}"/></div>
+      <div class="field"><label>Facebook (URL)</label><input id="s_fb" value="${esc(s.facebook)}"/></div>
+      <div class="field"><label>TikTok (URL)</label><input id="s_tt" value="${esc(s.tiktok)}"/></div>
+      <div class="field"><label>Alamat</label><input id="s_addr" value="${esc(s.address)}"/></div>
+      <div class="field full"><label>Teks Footer</label><textarea id="s_foot" rows="2">${esc(s.footer)}</textarea></div>
+    </div>
+    <div class="err" id="s_err"></div>
+    <button class="btn btn-primary" id="saveS" style="margin-top:8px">Simpan Pengaturan</button>
+   </div>`;
+  $('#saveS').onclick=async()=>{const body={store_name:$('#s_name').value,tagline:$('#s_tag').value,whatsapp_number:$('#s_wa').value,email:$('#s_email').value,instagram:$('#s_ig').value,facebook:$('#s_fb').value,tiktok:$('#s_tt').value,address:$('#s_addr').value,footer:$('#s_foot').value};
+    try{await apiReq('/settings','PUT',body);toast('Pengaturan disimpan');}catch(e){$('#s_err').textContent=e.message;}};
+};
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s??'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function openModal(){$('#overlay').classList.add('show');}
+function closeModal(){$('#overlay').classList.remove('show');}
+window.closeModal=closeModal;
+$('#overlay').onclick=e=>{if(e.target===$('#overlay'))closeModal();};
+$('#loginBtn').onclick=login;
+$('#password').onkeydown=e=>{if(e.key==='Enter')login();};
+$('#logoutBtn').onclick=logout;
+document.querySelectorAll('.nav-item[data-view]').forEach(n=>n.onclick=()=>go(n.dataset.view));
+
+if(TOKEN) enterApp();
+</script>
+</body>
+</html>
