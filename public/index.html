@@ -3,341 +3,365 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ShopKuy — Fashion Pria & Wanita Berkualitas</title>
-<meta name="description" content="Katalog fashion pria & wanita berkualitas. Belanja via Tokopedia, Shopee, atau WhatsApp." />
-<meta property="og:title" content="ShopKuy — Fashion Pria & Wanita Berkualitas" />
-<meta property="og:type" content="website" />
+<meta name="robots" content="noindex" />
+<title>Admin — ShopKuy</title>
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  :root{--ink:#111827;--blue:#2563EB;--amber:#F59E0B;--muted:#6B7280;--line:#EEF0F3}
-  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
+  :root{--ink:#111827;--blue:#2563EB;--amber:#F59E0B;--muted:#6B7280;--line:#E9EBEF;--bg:#F6F7F9}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
   button{font-family:inherit;cursor:pointer}
-  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
-  .topbar{background:var(--ink);color:#fff;text-align:center;font-size:12.5px;padding:9px 16px;font-weight:500}
-  header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .hd{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-  .logo{font-size:23px;font-weight:800;letter-spacing:-.02em}.logo span{color:var(--amber)}
-  nav.main{display:flex;gap:28px}
-  nav.main a{font-size:14.5px;font-weight:500}
-  nav.main a:hover{color:var(--blue)}
-  .hbtns{display:flex;align-items:center;gap:12px}
-  .icon-btn{width:40px;height:40px;border-radius:11px;border:1px solid #E5E7EB;background:#fff;display:flex;align-items:center;justify-content:center}
-  .wa-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:11px 18px;border-radius:11px}
-  .menu-btn{display:none;width:42px;height:42px;border-radius:11px;border:1px solid #E5E7EB;background:#fff;align-items:center;justify-content:center}
-  @media(max-width:880px){nav.main,.hbtns{display:none}.menu-btn{display:flex}}
-  .hero{margin-top:28px;border-radius:28px;overflow:hidden;min-height:480px;background:#0F1623;display:flex;align-items:flex-end;position:relative}
-  .hero .stripe{position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 22px)}
-  .hero-c{position:relative;padding:clamp(28px,5vw,60px);max-width:680px}
-  .pill{display:inline-block;background:var(--amber);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.05em;padding:7px 13px;border-radius:99px;margin-bottom:20px}
-  .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,6.5vw,72px);line-height:1.03;color:#fff;margin-bottom:16px}
-  .hero p{font-size:clamp(15px,2vw,18px);line-height:1.6;color:rgba(255,255,255,.72);margin-bottom:28px;max-width:480px}
-  .btn{border:none;font-weight:700;font-size:15px;padding:15px 26px;border-radius:13px}
-  .btn-light{background:#fff;color:var(--ink)}
-  .btn-dark{background:var(--ink);color:#fff}
-  section.block{padding:48px 0}
-  .shead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
-  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;margin-bottom:6px}
-  .shead h2{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.02em}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
-  .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-  .cat{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--line);display:block;text-align:left}
-  .cat .ph{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(17,24,39,.04) 0,rgba(17,24,39,.04) 1px,transparent 1px,transparent 15px)}
-  .cat .lbl{position:absolute;left:18px;bottom:18px}
-  .cat .lbl b{font-family:'Instrument Serif',serif;font-size:28px;font-weight:400;display:block}
-  .cat .lbl span{font-size:13px;color:var(--muted)}
-  .card{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff;cursor:pointer;transition:box-shadow .25s,transform .25s}
-  .card:hover{box-shadow:0 12px 30px rgba(17,24,39,.08);transform:translateY(-2px)}
-  .card .img{position:relative;aspect-ratio:3/4;overflow:hidden}
-  .card .img .ph{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(17,24,39,.04) 0,rgba(17,24,39,.04) 1px,transparent 1px,transparent 14px)}
-  .card .img img{width:100%;height:100%;object-fit:cover}
-  .badge{position:absolute;top:12px;left:12px;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px}
-  .disc{position:absolute;top:12px;right:12px;background:#FEF2F2;color:#DC2626;font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px}
-  .fototag{position:absolute;bottom:12px;left:12px;font-family:ui-monospace,monospace;font-size:10px;color:#9CA3AF;background:rgba(255,255,255,.8);border:1px dashed #D1D5DB;padding:5px 9px;border-radius:7px}
-  .card .body{padding:14px 15px 16px}
-  .card .brand{font-size:12px;color:#9CA3AF;font-weight:600;margin-bottom:4px}
-  .card .name{font-size:14.5px;font-weight:600;line-height:1.35;margin-bottom:10px;min-height:38px}
-  .price{font-size:16px;font-weight:800}
-  .old{font-size:12.5px;color:#9CA3AF;text-decoration:line-through;margin-left:8px}
-  .toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:22px}
-  .search{position:relative;flex:1;min-width:220px}
-  .search input{width:100%;border:1px solid #E5E7EB;border-radius:14px;padding:14px 16px 14px 44px;font-family:inherit;font-size:15px;outline:none}
-  .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#9CA3AF}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1px solid #E5E7EB;background:#fff;color:#374151;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:99px}
-  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-  select.sort{border:1px solid #E5E7EB;border-radius:11px;padding:10px 14px;font-family:inherit;font-size:13.5px;font-weight:600;background:#fff;outline:none}
-  .promo{border-radius:24px;overflow:hidden;background:var(--blue);padding:clamp(30px,5vw,52px);position:relative;color:#fff}
-  .promo .stripe{position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 24px)}
-  .promo h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,4.5vw,44px);line-height:1.05;margin-bottom:10px;position:relative}
-  .promo p{color:rgba(255,255,255,.85);margin-bottom:20px;position:relative}
-  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-  .testi{border:1px solid var(--line);border-radius:20px;padding:26px}
-  .testi .stars{color:var(--amber);letter-spacing:2px;margin-bottom:12px}
-  .testi p{font-size:15px;line-height:1.6;color:#374151;margin-bottom:18px}
-  .testi .who{display:flex;align-items:center;gap:12px}
-  .testi .av{width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
-  .cta{border-radius:24px;background:var(--ink);padding:clamp(32px,5vw,52px);text-align:center;position:relative;overflow:hidden;color:#fff}
-  .cta .stripe{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 22px)}
-  footer{background:#0F1623;color:#fff;margin-top:40px}
-  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px;padding:52px 0 28px}
-  .fcol h4{font-size:13px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.5);margin-bottom:16px}
-  .fcol a,.fcol div.li{display:block;font-size:14px;color:rgba(255,255,255,.75);margin-bottom:11px}
-  .fbot{border-top:1px solid rgba(255,255,255,.08);padding:20px 0;font-size:13px;color:rgba(255,255,255,.45);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
-  /* overlays */
-  .overlay{position:fixed;inset:0;z-index:60;background:rgba(15,22,35,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+  input,select,textarea{font-family:inherit;font-size:14px;width:100%;border:1px solid #D9DDE3;border-radius:10px;padding:11px 13px;outline:none;background:#fff}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#374151}
+  .field{margin-bottom:14px}
+  .btn{border:none;font-weight:700;font-size:14px;padding:11px 18px;border-radius:10px}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid #D9DDE3}
+  .btn-sm{padding:7px 12px;font-size:13px;font-weight:600;border-radius:8px}
+  .btn-danger{background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5}
+  /* login */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .login-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px;max-width:400px;width:100%;box-shadow:0 20px 50px rgba(17,24,39,.06)}
+  .logo{font-size:26px;font-weight:800}.logo span{color:var(--amber)}
+  /* app shell */
+  .shell{display:none;min-height:100vh;grid-template-columns:240px 1fr}
+  .shell.show{display:grid}
+  aside{background:#0F1623;color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+  aside .logo{color:#fff;padding:0 8px 20px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.7);background:none;border:none;width:100%;text-align:left;margin-bottom:2px}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav-item.active{background:var(--blue);color:#fff}
+  main{padding:28px 30px;overflow:auto;height:100vh}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .topbar h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:28px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+  .stat .n{font-size:30px;font-weight:800;letter-spacing:-.02em}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:2px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .panel-h{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .panel-h h3{font-size:16px;font-weight:700}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:12px 20px;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.04em}
+  td{padding:13px 20px;border-bottom:1px solid #F1F2F4;font-size:14px;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px}
+  .tag-on{background:#ECFDF5;color:#059669}.tag-off{background:#F3F4F6;color:#6B7280}
+  .thumb{width:44px;height:52px;border-radius:8px;object-fit:cover;background:#F3F4F6;border:1px solid var(--line)}
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap}
+  /* modal */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(15,22,35,.55);display:none;align-items:flex-start;justify-content:center;padding:30px 20px;overflow:auto}
   .overlay.show{display:flex}
-  .modal{background:#fff;border-radius:22px;max-width:920px;width:100%;max-height:90vh;overflow:auto}
-  .sheet{background:#fff;border-radius:22px;max-width:460px;width:100%;padding:26px 24px 30px}
-  .detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;padding:26px}
-  .gallery{aspect-ratio:3/4;border-radius:18px;overflow:hidden;position:relative;background:#F3F4F6}
-  .gallery .ph{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(17,24,39,.04) 0,rgba(17,24,39,.04) 1px,transparent 1px,transparent 16px)}
-  .gallery img{width:100%;height:100%;object-fit:cover}
-  .opt{min-width:46px;height:44px;padding:0 14px;border-radius:11px;border:1.5px solid #E5E7EB;background:#fff;font-weight:700;font-size:14px}
-  .buy-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
-  .mkt{display:flex;align-items:center;gap:14px;width:100%;border:1.5px solid #E5E7EB;background:#fff;padding:15px 18px;border-radius:15px;text-align:left;margin-bottom:11px}
-  .mkt .ic{flex:none;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
-  .mkt b{display:block;font-size:15px}.mkt small{color:#9CA3AF;font-size:13px}
-  .close-x{position:sticky;top:0;float:right;background:#fff;border:1px solid #E5E7EB;width:38px;height:38px;border-radius:10px;font-size:18px;margin:14px}
-  .skeleton{background:linear-gradient(90deg,#f3f4f6 25%,#e9ebee 37%,#f3f4f6 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;border-radius:18px;aspect-ratio:3/4}
-  @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
-  .mobnav{display:none;position:fixed;inset:0;z-index:55;background:rgba(17,24,39,.45)}
-  .mobnav.show{display:block}
-  .mobnav .panel{position:absolute;top:0;right:0;width:min(82vw,320px);height:100%;background:#fff;padding:22px;display:flex;flex-direction:column;gap:6px}
-  .mobnav a{padding:14px 4px;border-bottom:1px solid #F3F4F6;font-weight:600;font-size:16px}
+  .modal{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:24px}
+  .modal h3{font-size:19px;font-weight:800;margin-bottom:18px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .full{grid-column:1/-1}
+  .check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+  .check input{width:auto}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:80;opacity:0;transition:opacity .3s;pointer-events:none}
+  .toast.show{opacity:1}
+  .err{color:#DC2626;font-size:13px;margin-top:8px;min-height:18px}
+  .imgs-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .imgs-row .ti{position:relative;width:56px;height:66px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .imgs-row .ti img{width:100%;height:100%;object-fit:cover}
+  .imgs-row .ti button{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;width:18px;height:18px;border-radius:50%;font-size:11px;line-height:1}
+  @media(max-width:720px){.shell.show{grid-template-columns:1fr}aside{display:none}.form-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-  <div class="topbar">GRATIS ONGKIR untuk pembelian di atas Rp 300.000 &nbsp;•&nbsp; Pesan cepat via WhatsApp</div>
-  <header><div class="wrap hd">
-    <a href="#" class="logo" id="logo">ShopKuy<span>.</span></a>
-    <nav class="main">
-      <a href="#produk">Produk</a>
-      <a href="#kategori">Kategori</a>
-      <a href="#testimoni">Testimoni</a>
-      <a href="/admin">Admin</a>
-    </nav>
-    <div class="hbtns">
-      <a class="wa-btn" id="waTop" target="_blank" rel="noopener">WhatsApp</a>
+<!-- LOGIN -->
+<div class="login-wrap" id="loginView">
+  <div class="login-card">
+    <div style="text-align: center;">
+      <div class="logo" style="margin-bottom:6px">REIDO<span>.</span></div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Masuk ke panel admin</p>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
-  </div></header>
+    <div class="field"><label>Email</label><input id="email" type="email" value=""></div>
+    <div class="field"><label>Password</label><input id="password" type="password" placeholder=""></div>
+    <button class="btn btn-primary" style="width:100%" id="loginBtn">Masuk</button>
+    <div class="err" id="loginErr"></div>
+  </div>
+</div>
 
-  <div class="mobnav" id="mobnav"><div class="panel">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b style="font-size:20px">ShopKuy<span style="color:var(--amber)">.</span></b><button class="close-x" id="mobClose" style="margin:0">✕</button></div>
-    <a href="#produk">Produk</a><a href="#kategori">Kategori</a><a href="#testimoni">Testimoni</a><a href="/admin">Admin</a>
-  </div></div>
-
-  <main class="wrap">
-    <!-- HERO -->
-    <section class="hero" id="hero"><div class="stripe"></div>
-      <div class="hero-c">
-        <span class="pill" id="heroPill">KOLEKSI 2026</span>
-        <h1 id="heroTitle">Fashion Pria &amp; Wanita Berkualitas</h1>
-        <p id="heroSub">Pakaian, sepatu, dan aksesoris pilihan dengan bahan premium. Belanja mudah lewat Tokopedia, Shopee, atau langsung WhatsApp.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <a href="#produk" class="btn btn-light">Belanja Sekarang</a>
-          <a id="heroWa" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25)" target="_blank" rel="noopener">Chat WhatsApp</a>
-        </div>
+  <!-- APP -->
+  <div class="shell" id="shell">
+    <aside>
+      <div class="logo">REIDO<span>.</span></div>
+      <button class="nav-item active" data-view="dashboard">Dashboard</button>
+      <button class="nav-item" data-view="products">Produk</button>
+      <button class="nav-item" data-view="categories">Kategori</button>
+      <button class="nav-item" data-view="banners">Banner</button>
+      <button class="nav-item" data-view="testimonials">Testimoni</button>
+      <button class="nav-item" data-view="settings">Pengaturan</button>
+      <div style="margin-top:auto">
+        <a href="/" target="_blank" class="nav-item" style="text-decoration:none">↗ Lihat Toko</a>
+        <button class="nav-item" id="logoutBtn">Keluar</button>
       </div>
-    </section>
+    </aside>
+    <main id="main"></main>
+  </div>
 
-    <!-- KATEGORI -->
-    <section class="block" id="kategori">
-      <div class="shead"><div><div class="eyebrow" style="color:var(--blue)">KATEGORI</div><h2>Belanja per kategori</h2></div></div>
-      <div class="cat-grid" id="catGrid"></div>
-    </section>
-
-    <!-- PRODUK -->
-    <section class="block" id="produk">
-      <div class="shead"><div><div class="eyebrow" style="color:var(--amber)">KATALOG</div><h2>Semua Produk</h2></div></div>
-      <div class="toolbar">
-        <div class="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-          <input id="q" placeholder="Cari produk, brand…" />
-        </div>
-        <select class="sort" id="sort">
-          <option value="featured">Unggulan</option>
-          <option value="newest">Terbaru</option>
-          <option value="price-asc">Harga: Rendah → Tinggi</option>
-          <option value="price-desc">Harga: Tinggi → Rendah</option>
-        </select>
-      </div>
-      <div class="chips" id="chips" style="margin-bottom:22px"></div>
-      <div class="grid" id="grid"></div>
-    </section>
-
-    <!-- PROMO -->
-    <section class="block"><div class="promo"><div class="stripe"></div>
-      <span class="pill">PROMO SPESIAL</span>
-      <h2>Diskon koleksi pilihan</h2>
-      <p>Cek produk dengan label diskon — stok terbatas.</p>
-      <a href="#produk" class="btn btn-light">Lihat Promo</a>
-    </div></section>
-
-    <!-- TESTIMONI -->
-    <section class="block" id="testimoni">
-      <div class="shead" style="text-align:center;justify-content:center"><div><div class="eyebrow" style="color:var(--blue)">TESTIMONI</div><h2>Apa kata pelanggan</h2></div></div>
-      <div class="testi-grid" id="testiGrid"></div>
-    </section>
-
-    <!-- CTA -->
-    <section class="block"><div class="cta"><div class="stripe"></div>
-      <div style="position:relative">
-        <h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:10px">Butuh bantuan memilih?</h2>
-        <p style="color:rgba(255,255,255,.72);margin-bottom:22px">Tim kami siap membantu via WhatsApp.</p>
-        <a id="ctaWa" class="btn" style="background:#25D366;color:#fff" target="_blank" rel="noopener">Chat Sekarang</a>
-      </div>
-    </div></section>
-  </main>
-
-  <footer><div class="wrap">
-    <div class="fgrid">
-      <div class="fcol" style="max-width:300px">
-        <div class="logo" style="color:#fff;margin-bottom:12px">ShopKuy<span>.</span></div>
-        <p id="footAbout" style="font-size:14px;line-height:1.6;color:rgba(255,255,255,.6)"></p>
-      </div>
-      <div class="fcol"><h4>TAUTAN</h4><a href="#produk">Produk</a><a href="#kategori">Kategori</a><a href="#testimoni">Testimoni</a><a href="/admin">Admin</a></div>
-      <div class="fcol" id="footCats"><h4>KATEGORI</h4></div>
-      <div class="fcol" id="footContact"><h4>KONTAK</h4></div>
-    </div>
-    <div class="fbot"><span>© 2026 ShopKuy. Semua hak dilindungi.</span><span>Katalog produk · Bukan checkout langsung</span></div>
-  </div></footer>
-
-  <!-- DETAIL MODAL -->
-  <div class="overlay" id="detailOverlay"><div class="modal" id="detailModal"></div></div>
-  <!-- BUY SHEET -->
-  <div class="overlay" id="buyOverlay" style="align-items:flex-end"><div class="sheet" id="buySheet"></div></div>
+  <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
+  <div class="toast" id="toast"></div>
 
 <script>
-const rp = n => 'Rp ' + (n||0).toLocaleString('id-ID');
-const api = (p) => fetch('/api'+p).then(r=>r.json());
-let SETTINGS={}, PRODUCTS=[], CATS=[], state={cat:'all',q:'',sort:'featured'};
+let TOKEN = localStorage.getItem('sk_token') || '';
+let CATS = [];
 const $ = s => document.querySelector(s);
+const rp = n => 'Rp ' + (n||0).toLocaleString('id-ID');
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
-function waLink(text){ const num=(SETTINGS.whatsapp_number||'6281234567890'); return 'https://wa.me/'+num+'?text='+encodeURIComponent(text||'Halo ShopKuy!'); }
-function img(p){ return (p.images&&p.images[0])||null; }
+async function apiReq(path, method='GET', body){
+  const opt={method,headers:{}};
+  if(body){opt.headers['Content-Type']='application/json';opt.body=JSON.stringify(body);}
+  if(TOKEN) opt.headers['Authorization']='Bearer '+TOKEN;
+  const r=await fetch('/api'+path,opt);
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data.error||'Gagal');
+  return data;
+}
 
-function card(p){
-  const price = p.discount_price!=null ? p.discount_price : p.price;
-  const badge = p.best_seller?['Terlaris','#F59E0B']:(p.new_arrival?['Baru','#2563EB']:(p.featured?['Unggulan','#111827']:null));
-  const disc = p.discount_price!=null ? Math.round((1-p.discount_price/p.price)*100) : 0;
-  const im = img(p);
-  return `<div class="card" data-slug="${p.slug}">
-    <div class="img">${im?`<img src="${im}" alt="${p.name}" loading="lazy"/>`:`<div class="ph"></div><span class="fototag">FOTO · ${p.brand||''}</span>`}
-      ${badge?`<span class="badge" style="background:${badge[1]}">${badge[0]}</span>`:''}
-      ${disc?`<span class="disc">-${disc}%</span>`:''}
+/* ---------- AUTH ---------- */
+async function login(){
+  $('#loginErr').textContent='';
+  try{
+    const {token}=await apiReq('/auth/login','POST',{email:$('#email').value,password:$('#password').value});
+    TOKEN=token; localStorage.setItem('sk_token',token); enterApp();
+  }catch(e){ $('#loginErr').textContent=e.message; }
+}
+function logout(){ TOKEN=''; localStorage.removeItem('sk_token'); $('#shell').classList.remove('show'); $('#loginView').style.display='flex'; }
+async function enterApp(){
+  try{ await apiReq('/auth/me'); }catch(e){ logout(); return; }
+  $('#loginView').style.display='none'; $('#shell').classList.add('show');
+  CATS=await apiReq('/categories'); go('dashboard');
+}
+
+/* ---------- ROUTER ---------- */
+const views={};
+function go(v){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.view===v));
+  views[v]();
+}
+
+/* ---------- DASHBOARD ---------- */
+views.dashboard=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Dashboard</h1></div><div class="cards" id="cards"></div><div class="panel"><div class="panel-h"><h3>Produk Terbaru</h3></div><div id="recent"></div></div>';
+  const [prods,cats]=await Promise.all([apiReq('/products'),apiReq('/categories')]);
+  const pub=prods.filter(p=>p.published).length;
+  $('#cards').innerHTML=[
+    ['Total Produk',prods.length],['Produk Publish',pub],['Kategori',cats.length],['Pengunjung','—']
+  ].map(c=>`<div class="stat"><div class="n">${c[1]}</div><div class="l">${c[0]}</div></div>`).join('');
+  $('#recent').innerHTML=table(['','Nama','Harga','Status'],prods.slice(0,6).map(p=>`<tr>
+    <td>${thumb(p)}</td><td><b>${p.name}</b><div style="color:#9CA3AF;font-size:12px">${p.brand||''}</div></td>
+    <td>${rp(p.discount_price??p.price)}</td><td>${p.published?'<span class="tag tag-on">Publish</span>':'<span class="tag tag-off">Hidden</span>'}</td></tr>`).join(''));
+};
+function thumb(p){const im=(p.images&&p.images[0]);return im?`<img class="thumb" src="${im}"/>`:'<div class="thumb"></div>';}
+function table(cols,rows){return `<table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows||''}</tbody></table>`;}
+
+/* ---------- PRODUCTS ---------- */
+views.products=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Produk</h1><button class="btn btn-blue" id="addP">+ Tambah Produk</button></div><div class="panel" id="pPanel"></div>';
+  $('#addP').onclick=()=>productForm();
+  const prods=await apiReq('/products');
+  $('#pPanel').innerHTML=table(['','Nama','Kategori','Harga','Stok','Status','Aksi'],prods.map(p=>`<tr>
+    <td>${thumb(p)}</td>
+    <td><b>${p.name}</b><div style="color:#9CA3AF;font-size:12px">${p.brand||''} · ${p.sku||''}</div></td>
+    <td>${p.category_name||'-'}</td>
+    <td>${rp(p.discount_price??p.price)}${p.discount_price!=null?`<div style="color:#9CA3AF;font-size:12px;text-decoration:line-through">${rp(p.price)}</div>`:''}</td>
+    <td>${p.stock}</td>
+    <td>${p.published?'<span class="tag tag-on">Publish</span>':'<span class="tag tag-off">Hidden</span>'}</td>
+    <td><div class="row-actions">
+      <button class="btn btn-sm btn-ghost" data-edit="${p.id}">Edit</button>
+      <button class="btn btn-sm btn-ghost" data-pub="${p.id}" data-cur="${p.published}">${p.published?'Hide':'Publish'}</button>
+      <button class="btn btn-sm btn-ghost" data-dup="${p.id}">Duplikat</button>
+      <button class="btn btn-sm btn-danger" data-del="${p.id}">Hapus</button>
+    </div></td></tr>`).join(''));
+  const byId=id=>prods.find(p=>p.id==id);
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>productForm(byId(b.dataset.edit)));
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Hapus produk ini?')){await apiReq('/products/'+b.dataset.del,'DELETE');toast('Produk dihapus');views.products();}});
+  document.querySelectorAll('[data-dup]').forEach(b=>b.onclick=async()=>{await apiReq('/products/'+b.dataset.dup+'/duplicate','POST');toast('Produk diduplikat');views.products();});
+  document.querySelectorAll('[data-pub]').forEach(b=>b.onclick=async()=>{await apiReq('/products/'+b.dataset.pub+'/publish','PATCH',{published:b.dataset.cur!=='true'});toast('Status diperbarui');views.products();});
+};
+
+function productForm(p){
+  p=p||{};
+  const catOpts=CATS.map(c=>`<option value="${c.id}" ${p.category_id==c.id?'selected':''}>${c.name}</option>`).join('');
+  const imgs=(p.images||[]);
+  $('#modal').innerHTML=`<h3>${p.id?'Edit':'Tambah'} Produk</h3>
+   <div class="form-grid">
+    <div class="field full"><label>Nama Produk *</label><input id="f_name" value="${esc(p.name)}"/></div>
+    <div class="field"><label>Slug (opsional)</label><input id="f_slug" value="${esc(p.slug)}" placeholder="otomatis dari nama"/></div>
+    <div class="field"><label>SKU</label><input id="f_sku" value="${esc(p.sku)}"/></div>
+    <div class="field"><label>Kategori</label><select id="f_cat"><option value="">— pilih —</option>${catOpts}</select></div>
+    <div class="field"><label>Brand</label><input id="f_brand" value="${esc(p.brand)}"/></div>
+    <div class="field"><label>Harga (Rp) *</label><input id="f_price" type="number" value="${p.price||''}"/></div>
+    <div class="field"><label>Harga Diskon (Rp)</label><input id="f_disc" type="number" value="${p.discount_price??''}"/></div>
+    <div class="field"><label>Stok</label><input id="f_stock" type="number" value="${p.stock||0}"/></div>
+    <div class="field"><label>Ukuran (pisah koma)</label><input id="f_sizes" value="${esc((p.sizes||[]).join(', '))}"/></div>
+    <div class="field full"><label>Warna (Nama:#hex, pisah koma)</label><input id="f_colors" value="${esc((p.colors||[]).map(c=>c.name+':'+c.hex).join(', '))}" placeholder="Hitam:#111827, Putih:#F1F5F9"/></div>
+    <div class="field full"><label>Deskripsi</label><textarea id="f_desc" rows="3">${esc(p.description)}</textarea></div>
+    <div class="field"><label>Link Tokopedia</label><input id="f_tokped" value="${esc(p.tokopedia_url)}"/></div>
+    <div class="field"><label>Link Shopee</label><input id="f_shopee" value="${esc(p.shopee_url)}"/></div>
+    <div class="field"><label>Nomor WhatsApp</label><input id="f_wa" value="${esc(p.whatsapp_number)}" placeholder="6281234567890"/></div>
+    <div class="field"><label>Gambar Produk</label><input id="f_files" type="file" accept="image/*" multiple/><div class="imgs-row" id="imgsRow"></div></div>
+    <div class="field full" style="display:flex;flex-wrap:wrap;gap:18px;margin-top:4px">
+      <label class="check"><input type="checkbox" id="f_featured" ${p.featured?'checked':''}/> Unggulan</label>
+      <label class="check"><input type="checkbox" id="f_best" ${p.best_seller?'checked':''}/> Terlaris</label>
+      <label class="check"><input type="checkbox" id="f_new" ${p.new_arrival?'checked':''}/> Baru</label>
+      <label class="check"><input type="checkbox" id="f_pub" ${p.published!==false?'checked':''}/> Publish</label>
     </div>
-    <div class="body">
-      <div class="brand">${p.brand||''}</div>
-      <div class="name">${p.name}</div>
-      <div><span class="price">${rp(price)}</span>${p.discount_price!=null?`<span class="old">${rp(p.price)}</span>`:''}</div>
-    </div></div>`;
-}
-
-function renderGrid(){
-  let list = PRODUCTS.slice();
-  if(state.cat!=='all') list=list.filter(p=>p.category_slug===state.cat);
-  if(state.q){const q=state.q.toLowerCase();list=list.filter(p=>(p.name+' '+(p.brand||'')).toLowerCase().includes(q));}
-  if(state.sort==='price-asc') list.sort((a,b)=>(a.discount_price??a.price)-(b.discount_price??b.price));
-  else if(state.sort==='price-desc') list.sort((a,b)=>(b.discount_price??b.price)-(a.discount_price??a.price));
-  else if(state.sort==='newest') list.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-  else list.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
-  $('#grid').innerHTML = list.length ? list.map(card).join('') : '<p style="color:#6B7280;padding:40px 0">Produk tidak ditemukan.</p>';
-  document.querySelectorAll('.card').forEach(c=>c.onclick=()=>openDetail(c.dataset.slug));
-}
-
-function renderCats(){
-  const tints=['#EEF2FF','#FEF3F2','#FFFBEB','#ECFDF5'];
-  $('#catGrid').innerHTML = CATS.map((c,i)=>`<a class="cat" data-slug="${c.slug}" style="background:${tints[i%4]}"><div class="ph"></div><span class="fototag" style="top:14px;left:14px;bottom:auto">FOTO</span><div class="lbl"><b>${c.name}</b><span>${c.product_count||0} produk</span></div></a>`).join('');
-  document.querySelectorAll('.cat').forEach(el=>el.onclick=e=>{e.preventDefault();state.cat=el.dataset.slug;buildChips();renderGrid();location.hash='#produk';});
-  // chips
-  buildChips();
-  // footer cats
-  $('#footCats').innerHTML='<h4>KATEGORI</h4>'+CATS.map(c=>`<a href="#produk" data-slug="${c.slug}" class="fcat">${c.name}</a>`).join('');
-  document.querySelectorAll('.fcat').forEach(el=>el.onclick=()=>{state.cat=el.dataset.slug;buildChips();renderGrid();});
-}
-function buildChips(){
-  const all=[{slug:'all',name:'Semua'}].concat(CATS);
-  $('#chips').innerHTML=all.map(c=>`<button class="chip ${state.cat===c.slug?'active':''}" data-slug="${c.slug}">${c.name}</button>`).join('');
-  document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{state.cat=b.dataset.slug;buildChips();renderGrid();});
-}
-
-function openDetail(slug){
-  const p=PRODUCTS.find(x=>x.slug===slug); if(!p) return;
-  const price=p.discount_price!=null?p.discount_price:p.price;
-  const im=img(p);
-  const sizes=(p.sizes||[]).map(s=>`<button class="opt">${s}</button>`).join('');
-  const colors=(p.colors||[]).map(c=>`<button class="opt" title="${c.name}" style="width:40px;border-radius:50%;background:${c.hex};border:2px solid #fff;box-shadow:0 0 0 1px #E5E7EB"></button>`).join('');
-  const stockOk=p.stock>0;
-  $('#detailModal').innerHTML=`<button class="close-x" onclick="hide('#detailOverlay')">✕</button>
-   <div class="detail">
-    <div class="gallery">${im?`<img src="${im}"/>`:`<div class="ph"></div><span class="fototag" style="bottom:16px">FOTO PRODUK</span>`}</div>
-    <div>
-      <div style="color:var(--blue);font-weight:700;font-size:13px;margin-bottom:8px">${p.brand||''} · ${p.category_name||''}</div>
-      <h2 style="font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:14px">${p.name}</h2>
-      <div style="margin-bottom:14px"><span style="font-size:28px;font-weight:800">${rp(price)}</span>${p.discount_price!=null?`<span class="old" style="font-size:16px">${rp(p.price)}</span>`:''}</div>
-      <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:18px"><span style="width:8px;height:8px;border-radius:50%;background:${stockOk?'#059669':'#DC2626'}"></span><b style="color:${stockOk?'#059669':'#DC2626'};font-size:14px">${stockOk?'Tersedia · Stok '+p.stock:'Stok habis'}</b><span style="color:#D1D5DB">|</span><span style="color:#9CA3AF;font-size:13px">SKU: ${p.sku||'-'}</span></div>
-      <p style="color:#374151;line-height:1.7;margin-bottom:22px">${p.description||''}</p>
-      ${sizes?`<div style="margin-bottom:18px"><div style="font-weight:700;font-size:13px;margin-bottom:8px">Ukuran</div><div style="display:flex;flex-wrap:wrap;gap:8px">${sizes}</div></div>`:''}
-      ${colors?`<div style="margin-bottom:24px"><div style="font-weight:700;font-size:13px;margin-bottom:8px">Warna</div><div style="display:flex;gap:10px">${colors}</div></div>`:''}
-      <div class="buy-row"><button class="btn btn-dark" style="flex:1;min-width:200px" onclick="openBuy('${p.slug}')">Beli Sekarang</button></div>
-      <p style="text-align:center;color:#9CA3AF;font-size:13px;margin-top:12px">Tersedia di Tokopedia, Shopee &amp; WhatsApp</p>
-    </div>
+   </div>
+   <div class="err" id="f_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
+     <button class="btn btn-ghost" onclick="closeModal()">Batal</button>
+     <button class="btn btn-primary" id="saveP">Simpan</button>
    </div>`;
-  show('#detailOverlay');
+  openModal();
+  let images=imgs.slice();
+  function renderImgs(){$('#imgsRow').innerHTML=images.map((u,i)=>`<div class="ti"><img src="${u}"/><button data-i="${i}">✕</button></div>`).join('');
+    document.querySelectorAll('#imgsRow button').forEach(b=>b.onclick=()=>{images.splice(+b.dataset.i,1);renderImgs();});}
+  renderImgs();
+  $('#f_files').onchange=async e=>{
+    const files=e.target.files; if(!files.length)return;
+    const fd=new FormData(); for(const f of files) fd.append('files',f);
+    try{ const r=await fetch('/api/upload',{method:'POST',headers:{Authorization:'Bearer '+TOKEN},body:fd}); const d=await r.json(); if(d.urls){images=images.concat(d.urls);renderImgs();toast('Gambar diunggah');} }
+    catch(err){ toast('Upload gagal'); }
+  };
+  $('#saveP').onclick=async()=>{
+    const sizes=$('#f_sizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const colors=$('#f_colors').value.split(',').map(s=>s.trim()).filter(Boolean).map(s=>{const [name,hex]=s.split(':');return {name:(name||'').trim(),hex:(hex||'#cccccc').trim()};});
+    const body={
+      name:$('#f_name').value,slug:$('#f_slug').value,category_id:$('#f_cat').value||null,brand:$('#f_brand').value,
+      price:$('#f_price').value,discount_price:$('#f_disc').value,stock:$('#f_stock').value,sku:$('#f_sku').value,
+      description:$('#f_desc').value,sizes,colors,images,
+      tokopedia_url:$('#f_tokped').value,shopee_url:$('#f_shopee').value,whatsapp_number:$('#f_wa').value,
+      featured:$('#f_featured').checked,best_seller:$('#f_best').checked,new_arrival:$('#f_new').checked,published:$('#f_pub').checked
+    };
+    if(!body.name){$('#f_err').textContent='Nama produk wajib diisi';return;}
+    try{ await apiReq('/products'+(p.id?'/'+p.id:''),p.id?'PUT':'POST',body); closeModal(); toast('Produk disimpan'); views.products(); }
+    catch(e){ $('#f_err').textContent=e.message; }
+  };
 }
 
-function openBuy(slug){
-  const p=PRODUCTS.find(x=>x.slug===slug); if(!p) return;
-  const price=p.discount_price!=null?p.discount_price:p.price;
-  const wa=p.whatsapp_number||SETTINGS.whatsapp_number||'6281234567890';
-  const waUrl='https://wa.me/'+wa+'?text='+encodeURIComponent('Halo ShopKuy, saya tertarik dengan produk *'+p.name+'* ('+(p.sku||'')+'). Apakah masih tersedia?');
-  const mkt=(bg,letter,title,sub,url,svg)=>`<a class="mkt" href="${url||'#'}" ${url?'target="_blank" rel="noopener"':''}><span class="ic" style="background:${bg}">${svg||letter}</span><span style="flex:1"><b>${title}</b><small>${sub}</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>`;
-  $('#buySheet').innerHTML=`<div style="width:42px;height:5px;border-radius:99px;background:#E5E7EB;margin:0 auto 20px"></div>
-    <h3 style="font-size:18px;font-weight:800;margin-bottom:4px">Pilih tempat pembelian</h3>
-    <p style="color:#6B7280;font-size:14px;margin-bottom:18px">${p.name} — ${rp(price)}</p>
-    ${mkt('#03AC0E','T','Beli via Tokopedia','Resmi & bergaransi',p.tokopedia_url)}
-    ${mkt('#EE4D2D','S','Beli via Shopee','Gratis ongkir & cashback',p.shopee_url)}
-    ${mkt('#25D366','','Pesan via WhatsApp','Tanya stok & ukuran langsung',waUrl,'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2z"/></svg>')}
-    <button class="btn" style="width:100%;background:none;color:#9CA3AF;font-weight:600;margin-top:6px" onclick="hide('#buyOverlay')">Batal</button>`;
-  show('#buyOverlay');
-}
-function show(s){$(s).classList.add('show');document.body.style.overflow='hidden';}
-function hide(s){$(s).classList.remove('show');document.body.style.overflow='';}
-window.openBuy=openBuy;window.hide=hide;
-[ '#detailOverlay','#buyOverlay'].forEach(s=>$(s).onclick=e=>{if(e.target===$(s))hide(s);});
-
-function applySettings(){
-  document.title=(SETTINGS.store_name||'ShopKuy')+' — '+(SETTINGS.tagline||'');
-  $('#footAbout').textContent=SETTINGS.footer||SETTINGS.tagline||'';
-  ['#waTop','#heroWa','#ctaWa'].forEach(s=>$(s).href=waLink());
-  $('#footContact').innerHTML='<h4>KONTAK</h4>'+
-    (SETTINGS.whatsapp_number?`<div class="li">${SETTINGS.whatsapp_number}</div>`:'')+
-    (SETTINGS.email?`<div class="li">${SETTINGS.email}</div>`:'')+
-    (SETTINGS.address?`<div class="li">${SETTINGS.address}</div>`:'');
+/* ---------- CATEGORIES ---------- */
+views.categories=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Kategori</h1><button class="btn btn-blue" id="addC">+ Tambah Kategori</button></div><div class="panel" id="cPanel"></div>';
+  $('#addC').onclick=()=>catForm();
+  CATS=await apiReq('/categories');
+  $('#cPanel').innerHTML=table(['Nama','Slug','Produk','Status','Aksi'],CATS.map(c=>`<tr>
+    <td><b>${c.name}</b></td><td style="color:#6B7280">${c.slug}</td><td>${c.product_count||0}</td>
+    <td>${c.published?'<span class="tag tag-on">Aktif</span>':'<span class="tag tag-off">Hidden</span>'}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-ec="${c.id}">Edit</button><button class="btn btn-sm btn-danger" data-dc="${c.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-ec]').forEach(b=>b.onclick=()=>catForm(CATS.find(c=>c.id==b.dataset.ec)));
+  document.querySelectorAll('[data-dc]').forEach(b=>b.onclick=async()=>{if(confirm('Hapus kategori ini?')){await apiReq('/categories/'+b.dataset.dc,'DELETE');toast('Kategori dihapus');views.categories();}});
+};
+function catForm(c){c=c||{};
+  $('#modal').innerHTML=`<h3>${c.id?'Edit':'Tambah'} Kategori</h3>
+   <div class="field"><label>Nama *</label><input id="c_name" value="${esc(c.name)}"/></div>
+   <div class="field"><label>Slug (opsional)</label><input id="c_slug" value="${esc(c.slug)}"/></div>
+   <div class="field"><label>Urutan</label><input id="c_sort" type="number" value="${c.sort||0}"/></div>
+   <label class="check"><input type="checkbox" id="c_pub" ${c.published!==false?'checked':''}/> Aktif</label>
+   <div class="err" id="c_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveC">Simpan</button></div>`;
+  openModal();
+  $('#saveC').onclick=async()=>{const body={name:$('#c_name').value,slug:$('#c_slug').value,sort:$('#c_sort').value,published:$('#c_pub').checked};
+    if(!body.name){$('#c_err').textContent='Nama wajib diisi';return;}
+    try{await apiReq('/categories'+(c.id?'/'+c.id:''),c.id?'PUT':'POST',body);closeModal();toast('Kategori disimpan');views.categories();}catch(e){$('#c_err').textContent=e.message;}};
 }
 
-async function init(){
-  $('#grid').innerHTML=Array(8).fill('<div class="skeleton"></div>').join('');
-  [SETTINGS,PRODUCTS,CATS] = await Promise.all([api('/settings'),api('/products'),api('/categories')]);
-  applySettings(); renderCats(); renderGrid();
-  // testimonials
-  const t=await api('/testimonials');
-  $('#testiGrid').innerHTML=t.map(x=>`<div class="testi"><div class="stars">${'★'.repeat(x.rating||5)}</div><p>“${x.text}”</p><div class="who"><div class="av">${(x.name||'').split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b style="font-size:14px">${x.name}</b><div style="font-size:12.5px;color:#9CA3AF">${x.role||''}</div></div></div></div>`).join('');
-  // hero from active banner
-  const banners=await api('/banners');
-  if(banners[0]){const b=banners[0];if(b.title)$('#heroTitle').textContent=b.title;if(b.subtitle)$('#heroSub').textContent=b.subtitle;}
+/* ---------- BANNERS ---------- */
+views.banners=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Banner</h1><button class="btn btn-blue" id="addB">+ Tambah Banner</button></div><div class="panel" id="bPanel"></div>';
+  $('#addB').onclick=()=>bannerForm();
+  const bs=await apiReq('/banners');
+  $('#bPanel').innerHTML=table(['Judul','Subjudul','Tombol','Status','Aksi'],bs.map(b=>`<tr>
+    <td><b>${esc(b.title)}</b></td><td style="color:#6B7280">${esc(b.subtitle)}</td><td>${esc(b.button_text)}</td>
+    <td>${b.active?'<span class="tag tag-on">Aktif</span>':'<span class="tag tag-off">Off</span>'}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-eb="${b.id}">Edit</button><button class="btn btn-sm btn-danger" data-db="${b.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-eb]').forEach(x=>x.onclick=()=>bannerForm(bs.find(b=>b.id==x.dataset.eb)));
+  document.querySelectorAll('[data-db]').forEach(x=>x.onclick=async()=>{if(confirm('Hapus banner?')){await apiReq('/banners/'+x.dataset.db,'DELETE');toast('Banner dihapus');views.banners();}});
+};
+function bannerForm(b){b=b||{};
+  $('#modal').innerHTML=`<h3>${b.id?'Edit':'Tambah'} Banner</h3>
+   <div class="field"><label>Judul</label><input id="b_title" value="${esc(b.title)}"/></div>
+   <div class="field"><label>Subjudul</label><input id="b_sub" value="${esc(b.subtitle)}"/></div>
+   <div class="form-grid"><div class="field"><label>Teks Tombol</label><input id="b_bt" value="${esc(b.button_text)}"/></div>
+   <div class="field"><label>Link Tombol</label><input id="b_bl" value="${esc(b.button_link)}"/></div></div>
+   <label class="check"><input type="checkbox" id="b_act" ${b.active!==false?'checked':''}/> Aktif</label>
+   <div class="err" id="b_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveB">Simpan</button></div>`;
+  openModal();
+  $('#saveB').onclick=async()=>{const body={title:$('#b_title').value,subtitle:$('#b_sub').value,button_text:$('#b_bt').value,button_link:$('#b_bl').value,active:$('#b_act').checked};
+    try{await apiReq('/banners'+(b.id?'/'+b.id:''),b.id?'PUT':'POST',body);closeModal();toast('Banner disimpan');views.banners();}catch(e){$('#b_err').textContent=e.message;}};
 }
-$('#q').oninput=e=>{state.q=e.target.value;renderGrid();};
-$('#sort').onchange=e=>{state.sort=e.target.value;renderGrid();};
-$('#menuBtn').onclick=()=>$('#mobnav').classList.add('show');
-$('#mobClose').onclick=()=>$('#mobnav').classList.remove('show');
-document.querySelectorAll('#mobnav a').forEach(a=>a.onclick=()=>$('#mobnav').classList.remove('show'));
-init();
+
+/* ---------- TESTIMONIALS ---------- */
+views.testimonials=async()=>{
+  $('#main').innerHTML='<div class="topbar"><h1>Testimoni</h1><button class="btn btn-blue" id="addT">+ Tambah Testimoni</button></div><div class="panel" id="tPanel"></div>';
+  $('#addT').onclick=()=>testiForm();
+  const ts=await apiReq('/testimonials');
+  $('#tPanel').innerHTML=table(['Nama','Asal','Testimoni','Rating','Aksi'],ts.map(t=>`<tr>
+    <td><b>${esc(t.name)}</b></td><td style="color:#6B7280">${esc(t.role)}</td><td style="max-width:320px">${esc(t.text)}</td><td>${'★'.repeat(t.rating||5)}</td>
+    <td><div class="row-actions"><button class="btn btn-sm btn-ghost" data-et="${t.id}">Edit</button><button class="btn btn-sm btn-danger" data-dt="${t.id}">Hapus</button></div></td></tr>`).join(''));
+  document.querySelectorAll('[data-et]').forEach(x=>x.onclick=()=>testiForm(ts.find(t=>t.id==x.dataset.et)));
+  document.querySelectorAll('[data-dt]').forEach(x=>x.onclick=async()=>{if(confirm('Hapus testimoni?')){await apiReq('/testimonials/'+x.dataset.dt,'DELETE');toast('Testimoni dihapus');views.testimonials();}});
+};
+function testiForm(t){t=t||{};
+  $('#modal').innerHTML=`<h3>${t.id?'Edit':'Tambah'} Testimoni</h3>
+   <div class="form-grid"><div class="field"><label>Nama *</label><input id="t_name" value="${esc(t.name)}"/></div>
+   <div class="field"><label>Asal / Kota</label><input id="t_role" value="${esc(t.role)}"/></div></div>
+   <div class="field"><label>Testimoni</label><textarea id="t_text" rows="3">${esc(t.text)}</textarea></div>
+   <div class="field"><label>Rating (1-5)</label><input id="t_rate" type="number" min="1" max="5" value="${t.rating||5}"/></div>
+   <div class="err" id="t_err"></div>
+   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost" onclick="closeModal()">Batal</button><button class="btn btn-primary" id="saveT">Simpan</button></div>`;
+  openModal();
+  $('#saveT').onclick=async()=>{const body={name:$('#t_name').value,role:$('#t_role').value,text:$('#t_text').value,rating:$('#t_rate').value};
+    if(!body.name){$('#t_err').textContent='Nama wajib diisi';return;}
+    try{await apiReq('/testimonials'+(t.id?'/'+t.id:''),t.id?'PUT':'POST',body);closeModal();toast('Testimoni disimpan');views.testimonials();}catch(e){$('#t_err').textContent=e.message;}};
+}
+
+/* ---------- SETTINGS ---------- */
+views.settings=async()=>{
+  const s=await apiReq('/settings');
+  $('#main').innerHTML=`<div class="topbar"><h1>Pengaturan Toko</h1></div>
+   <div class="panel" style="padding:24px;max-width:720px">
+    <div class="form-grid">
+      <div class="field"><label>Nama Toko</label><input id="s_name" value="${esc(s.store_name)}"/></div>
+      <div class="field"><label>Tagline</label><input id="s_tag" value="${esc(s.tagline)}"/></div>
+      <div class="field"><label>Nomor WhatsApp</label><input id="s_wa" value="${esc(s.whatsapp_number)}" placeholder="6281234567890"/></div>
+      <div class="field"><label>Email</label><input id="s_email" value="${esc(s.email)}"/></div>
+      <div class="field"><label>Instagram (URL)</label><input id="s_ig" value="${esc(s.instagram)}"/></div>
+      <div class="field"><label>Facebook (URL)</label><input id="s_fb" value="${esc(s.facebook)}"/></div>
+      <div class="field"><label>TikTok (URL)</label><input id="s_tt" value="${esc(s.tiktok)}"/></div>
+      <div class="field"><label>Alamat</label><input id="s_addr" value="${esc(s.address)}"/></div>
+      <div class="field full"><label>Teks Footer</label><textarea id="s_foot" rows="2">${esc(s.footer)}</textarea></div>
+    </div>
+    <div class="err" id="s_err"></div>
+    <button class="btn btn-primary" id="saveS" style="margin-top:8px">Simpan Pengaturan</button>
+   </div>`;
+  $('#saveS').onclick=async()=>{const body={store_name:$('#s_name').value,tagline:$('#s_tag').value,whatsapp_number:$('#s_wa').value,email:$('#s_email').value,instagram:$('#s_ig').value,facebook:$('#s_fb').value,tiktok:$('#s_tt').value,address:$('#s_addr').value,footer:$('#s_foot').value};
+    try{await apiReq('/settings','PUT',body);toast('Pengaturan disimpan');}catch(e){$('#s_err').textContent=e.message;}};
+};
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s??'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function openModal(){$('#overlay').classList.add('show');}
+function closeModal(){$('#overlay').classList.remove('show');}
+window.closeModal=closeModal;
+$('#overlay').onclick=e=>{if(e.target===$('#overlay'))closeModal();};
+$('#loginBtn').onclick=login;
+$('#password').onkeydown=e=>{if(e.key==='Enter')login();};
+$('#logoutBtn').onclick=logout;
+document.querySelectorAll('.nav-item[data-view]').forEach(n=>n.onclick=()=>go(n.dataset.view));
+
+if(TOKEN) enterApp();
 </script>
 </body>
 </html>
